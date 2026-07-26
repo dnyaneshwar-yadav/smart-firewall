@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ===================================== -->
+<!-- Dashboard Cards -->
+<!-- ===================================== -->
+
+<div class="cards fade">
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Total Packets</h3>
+
+                <h1 id="total_packets">
+
+                    {{ total_packets }}
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-network-wired"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Allowed Packets</h3>
+
+                <h1
+                    id="allowed_packets"
+                    class="text-success">
+
+                    {{ allowed_packets }}
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Blocked Packets</h3>
+
+                <h1
+                    id="blocked_packets"
+                    class="text-danger">
+
+                    {{ blocked_packets }}
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-ban"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Total Rules</h3>
+
+                <h1 id="total_rules">
+
+                    {{ total_rules }}
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-list-check"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Firewall Status</h3>
+
+                <div class="live">
+
+                    Running
+
+                </div>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- Recent Logs -->
+<!-- ===================================== -->
+
+<div class="logs-section fade">
+
+    <div class="panel-title">
+
+        <h2>
+
+            Recent Firewall Logs
+
+        </h2>
+
+        <span class="badge badge-success">
+
+            LIVE
+
+        </span>
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Timestamp</th>
+                <th>Source IP</th>
+                <th>Destination IP</th>
+                <th>Protocol</th>
+                <th>Action</th>
+                <th>Reason</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="recent_logs">
+
+            {% for log in recent_logs %}
+
+            <tr>
+
+                <td>{{ log[0] }}</td>
+
+                <td>{{ log[1] }}</td>
+
+                <td>{{ log[2] }}</td>
+
+                <td>{{ log[3] }}</td>
+
+                <td>
+
+                    <span class="badge badge-info">
+
+                        {{ log[4] }}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    {% if log[5] == "ALLOW" %}
+
+                        <span class="badge badge-success">
+
+                            {{ log[5] }}
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge badge-danger">
+
+                            {{ log[5] }}
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ log[6] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+{% endblock %}

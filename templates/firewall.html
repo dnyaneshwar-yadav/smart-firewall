@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ===================================== -->
+<!-- Firewall Header -->
+<!-- ===================================== -->
+
+<div class="panel-title">
+
+    <h2>
+
+        <i class="fa-solid fa-fire"></i>
+
+        Linux Firewall
+
+    </h2>
+
+    <span class="badge badge-success">
+
+        IPTABLES ACTIVE
+
+    </span>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- Status Cards -->
+<!-- ===================================== -->
+
+<div class="cards fade">
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Firewall Engine</h3>
+
+                <h1 class="text-success">
+
+                    IPTables
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Status</h3>
+
+                <div class="live">
+
+                    Running
+
+                </div>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Rule Source</h3>
+
+                <h1>
+
+                    Linux
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-brands fa-linux"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- IPTables Rules -->
+<!-- ===================================== -->
+
+<div class="logs-section fade">
+
+    <div class="panel-title">
+
+        <h2>
+
+            <i class="fa-solid fa-list"></i>
+
+            Active IPTables Rules
+
+        </h2>
+
+        <span class="badge badge-info">
+
+            SYSTEM FIREWALL
+
+        </span>
+
+    </div>
+
+    <pre
+style="
+background:#111827;
+border:1px solid #30363d;
+border-radius:10px;
+padding:20px;
+color:#00ff99;
+font-size:15px;
+overflow:auto;
+min-height:350px;
+white-space:pre-wrap;
+">
+
+{{ rules }}
+
+    </pre>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- Actions -->
+<!-- ===================================== -->
+
+<div
+style="
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+">
+
+    <a
+        href="/firewall"
+        class="btn">
+
+        <i class="fa-solid fa-rotate-right"></i>
+
+        Refresh Rules
+
+    </a>
+
+    <a
+        href="/flush-firewall"
+        class="delete-btn"
+        onclick="return confirm('Flush all IPTables rules?');">
+
+        <i class="fa-solid fa-trash"></i>
+
+        Flush Firewall
+
+    </a>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- Information -->
+<!-- ===================================== -->
+
+<div class="logs-section fade">
+
+    <div class="panel-title">
+
+        <h2>
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            Firewall Information
+
+        </h2>
+
+    </div>
+
+    <table>
+
+        <tbody>
+
+            <tr>
+
+                <td><strong>Firewall</strong></td>
+
+                <td>Linux IPTables</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Packet Engine</strong></td>
+
+                <td>Scapy</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Mode</strong></td>
+
+                <td>
+
+                    <span class="badge badge-success">
+
+                        Simulation
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Permission</strong></td>
+
+                <td>Requires Root Access</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Rule Viewer</strong></td>
+
+                <td>iptables -L</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

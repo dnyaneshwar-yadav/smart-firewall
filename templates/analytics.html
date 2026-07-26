@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ===================================== -->
+<!-- Analytics Header -->
+<!-- ===================================== -->
+
+<div class="panel-title">
+
+    <h2>
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        Firewall Analytics
+
+    </h2>
+
+    <span class="badge badge-success">
+
+        LIVE ANALYTICS
+
+    </span>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- Statistics Cards -->
+<!-- ===================================== -->
+
+<div class="cards fade">
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Total Packets</h3>
+
+                <h1 id="analytics_total_packets">
+
+                    {{ total_packets }}
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-network-wired"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Allowed Packets</h3>
+
+                <h1
+                    id="analytics_allowed_packets"
+                    class="text-success">
+
+                    {{ allowed_packets }}
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Blocked Packets</h3>
+
+                <h1
+                    id="analytics_blocked_packets"
+                    class="text-danger">
+
+                    {{ blocked_packets }}
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-ban"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="info-box">
+
+            <div>
+
+                <h3>Total Rules</h3>
+
+                <h1 id="analytics_total_rules">
+
+                    {{ total_rules }}
+
+                </h1>
+
+            </div>
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-list-check"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- Charts -->
+<!-- ===================================== -->
+
+<div
+style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(450px,1fr));
+gap:25px;
+">
+
+    <!-- Allow vs Block -->
+
+    <div class="logs-section fade">
+
+        <div class="panel-title">
+
+            <h2>
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Allow vs Block
+
+            </h2>
+
+            <span class="badge badge-success">
+
+                LIVE
+
+            </span>
+
+        </div>
+
+        <canvas
+            id="actionChart"
+            height="280">
+
+        </canvas>
+
+    </div>
+
+    <!-- Protocol Distribution -->
+
+    <div class="logs-section fade">
+
+        <div class="panel-title">
+
+            <h2>
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                Protocol Distribution
+
+            </h2>
+
+            <span class="badge badge-info">
+
+                REAL TIME
+
+            </span>
+
+        </div>
+
+        <canvas
+            id="protocolChart"
+            height="280">
+
+        </canvas>
+
+    </div>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- Footer Info -->
+<!-- ===================================== -->
+
+<div class="logs-section fade">
+
+    <div class="panel-title">
+
+        <h2>
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            Analytics Information
+
+        </h2>
+
+    </div>
+
+    <p class="text-muted">
+
+        This dashboard updates automatically and displays real-time packet
+        statistics collected by the Smart Firewall packet sniffer.
+        Charts represent the latest network traffic captured by the monitoring
+        engine.
+
+    </p>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+
+{% endblock %}

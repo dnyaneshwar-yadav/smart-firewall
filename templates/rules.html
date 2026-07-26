@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ===================================== -->
+<!-- Add Firewall Rule -->
+<!-- ===================================== -->
+
+<div class="logs-section fade">
+
+    <div class="panel-title">
+
+        <h2>
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            Add Firewall Rule
+
+        </h2>
+
+        <span class="badge badge-success">
+
+            RULE MANAGER
+
+        </span>
+
+    </div>
+
+    <form action="/rules" method="POST">
+
+        <div class="form-group">
+
+            <label>
+
+                <i class="fa-solid fa-filter"></i>
+
+                Rule Type
+
+            </label>
+
+            <select name="rule_type" required>
+
+                <option value="IP">
+
+                    🌐 IP Address
+
+                </option>
+
+                <option value="PORT">
+
+                    🔌 Port
+
+                </option>
+
+                <option value="PROTOCOL">
+
+                    📡 Protocol
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                <i class="fa-solid fa-keyboard"></i>
+
+                Rule Value
+
+            </label>
+
+            <input
+                type="text"
+                name="value"
+                placeholder="Example : 192.168.1.10 / 80 / ICMP"
+                required>
+
+        </div>
+
+        <div
+        style="
+        display:flex;
+        gap:15px;
+        flex-wrap:wrap;
+        ">
+
+            <button
+                class="btn"
+                type="submit">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Rule
+
+            </button>
+
+            <a
+                href="/apply-rules"
+                class="btn"
+                style="text-decoration:none;">
+
+                <i class="fa-solid fa-bolt"></i>
+
+                Apply Firewall Rules
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+<br>
+
+<!-- ===================================== -->
+<!-- Current Rules -->
+<!-- ===================================== -->
+
+<div class="logs-section fade">
+
+    <div class="panel-title">
+
+        <h2>
+
+            <i class="fa-solid fa-list-check"></i>
+
+            Active Firewall Rules
+
+        </h2>
+
+        <span class="badge badge-info">
+
+            {{ rules|length }} Rules
+
+        </span>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Rule Type</th>
+
+                <th>Value</th>
+
+                <th>Status</th>
+
+                <th>Created</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% if rules %}
+
+            {% for rule in rules %}
+
+            <tr>
+
+                <td>
+
+                    {{ rule[0] }}
+
+                </td>
+
+                <td>
+
+                    {% if rule[1] == "IP" %}
+
+                        🌐 IP Address
+
+                    {% elif rule[1] == "PORT" %}
+
+                        🔌 Port
+
+                    {% else %}
+
+                        📡 Protocol
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <strong>
+
+                        {{ rule[2] }}
+
+                    </strong>
+
+                </td>
+
+                <td>
+
+                    <span class="badge badge-success">
+
+                        {{ rule[3] }}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    {{ rule[4] }}
+
+                </td>
+
+                <td>
+
+                    <a
+                        href="/delete-rule/{{ rule[0] }}"
+                        class="delete-btn"
+                        onclick="return confirm('Delete this rule?')">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Delete
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        {% else %}
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="empty">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <br><br>
+
+                    No Firewall Rules Found
+
+                </td>
+
+            </tr>
+
+        {% endif %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

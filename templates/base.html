@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Smart Firewall
+
+    </title>
+
+    <!-- Google Font -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ================================= -->
+    <!-- Sidebar -->
+    <!-- ================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h2>
+
+                Smart Firewall
+
+            </h2>
+
+        </div>
+
+        <ul class="menu">
+
+            <li>
+
+                <a
+                    href="/"
+                    class="{% if request.path=='/' %}active{% endif %}">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>
+
+                        Dashboard
+
+                    </span>
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a
+                    href="/rules"
+                    class="{% if request.path.startswith('/rules') or request.path.startswith('/delete-rule') or request.path.startswith('/apply-rules') %}active{% endif %}">
+
+                    <i class="fa-solid fa-list-check"></i>
+
+                    <span>
+
+                        Rules
+
+                    </span>
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a
+                    href="/logs"
+                    class="{% if request.path.startswith('/logs') or request.path.startswith('/clear-logs') or request.path.startswith('/export-logs') %}active{% endif %}">
+
+                    <i class="fa-solid fa-file-lines"></i>
+
+                    <span>
+
+                        Logs
+
+                    </span>
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a
+                    href="/analytics"
+                    class="{% if request.path.startswith('/analytics') %}active{% endif %}">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <span>
+
+                        Analytics
+
+                    </span>
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a
+                    href="/firewall"
+                    class="{% if request.path.startswith('/firewall') or request.path.startswith('/flush-firewall') %}active{% endif %}">
+
+                    <i class="fa-solid fa-fire"></i>
+
+                    <span>
+
+                        Firewall
+
+                    </span>
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a
+                    href="/settings"
+                    class="{% if request.path.startswith('/settings') %}active{% endif %}">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>
+
+                        Settings
+
+                    </span>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ================================= -->
+    <!-- Main Content -->
+    <!-- ================================= -->
+
+    <main class="content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+
+                    Smart Firewall
+
+                </h1>
+
+                <p class="text-muted">
+
+                    Real-Time Network Monitoring & Packet Analysis
+
+                </p>
+
+            </div>
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                Firewall Running
+
+            </div>
+
+        </header>
+
+        {% block content %}
+
+        {% endblock %}
+
+        <!-- Footer -->
+
+        <footer
+            style="
+            margin-top:40px;
+            text-align:center;
+            color:#8b949e;
+            font-size:14px;
+            ">
+
+            Smart Firewall v1.0 |
+            Python • Flask • Scapy • SQLite • IPTables
+
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- Common JS -->
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+<!-- Page Specific JS -->
+
+{% block scripts %}
+
+{% endblock %}
+
+</body>
+
+</html>
